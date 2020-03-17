@@ -57,13 +57,15 @@ export default class NoteRegister {
   
   private getTotals(noteValue: number, itenValues: number[]) {
     return {
-      tax: noteValue - sum(itenValues),
+      tax:  sum(itenValues) - noteValue,
       financialMoves: sum(itenValues.map(price => Math.abs(price))),
     };
   }
 
   private appliedTax(noteValue: number, moves: Movement[]) {
     const total = this.getTotals(noteValue, moves.map(move => move.price));
+    console.log({...total, noteValue});
+
     const taxPerUnit = total.tax / total.financialMoves;
     const taxedMoves = moves.map(move => {
       const tax = taxPerUnit * Math.abs(move.price);
@@ -75,6 +77,8 @@ export default class NoteRegister {
         decimalTax,
       };
     }).sort((v1, v2) => v2.decimalTax - v1.decimalTax);
+    console.log(taxedMoves);
+
     const leadingCents = total.tax - sum(taxedMoves.map(move => move.integerTax));
     taxedMoves.forEach((move, index) => {
       delete move.decimalTax;
@@ -82,6 +86,8 @@ export default class NoteRegister {
       move.price -= move.integerTax;
       delete move.integerTax;
     });
+    console.log(taxedMoves);
+    
     return taxedMoves;
   }
 
@@ -90,6 +96,7 @@ export default class NoteRegister {
     const groupedMoves = this.groupMoves(moves);
     moves = this.filterMoves(Object.values(groupedMoves)
         .map(grouped => this.joinMoves(grouped)));
+    console.log(moves);
 
     const moveRegister = new MovementRegister();
     this.appliedTax(note.value, moves).forEach((move) => {

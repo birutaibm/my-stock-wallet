@@ -1,8 +1,9 @@
 import React, {useState, Fragment} from 'react';
 import { Form } from '@unform/web';
 import { Scope } from '@unform/core';
-import { BrokerageNote as Type, BrokerageNoteItem } from 'protocol';
+import {History} from 'history';
 
+import { BrokerageNote as Type, BrokerageNoteItem } from 'protocol';
 //import Input from './Input';
 import Item from './Item';
 import { Container, Item as Labels, Row } from './styles';
@@ -10,9 +11,13 @@ import Date from './Date';
 import Currency from './Currency';
 import api from '../../services/api';
 
-export default function BrokerageNote() {
-  const [itens, setItens] = useState<BrokerageNoteItem[]>([]);
+interface Props {
+  history: History
+};
 
+const BrokerageNote: React.FunctionComponent<Props> = function ({history}) {
+  const [itens, setItens] = useState<BrokerageNoteItem[]>([]);
+  
   function renderItens() {
     return (
       <Fragment>
@@ -30,7 +35,7 @@ export default function BrokerageNote() {
       </Fragment>
     );
   }
-
+  
   function addItem(e: React.MouseEvent) {
     e.preventDefault();
     setItens(old => [
@@ -48,11 +53,12 @@ export default function BrokerageNote() {
     console.log('Saving note:', data);
     const response = await api.post('/notes', data);
     console.log(response);
+    history.push("/");
   }
-
+  
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} action="/">
         <Row>
           <label htmlFor="date">Data:</label>
           <Date name="date" required />
@@ -67,4 +73,6 @@ export default function BrokerageNote() {
       </Form>
     </Container>
   );
-}
+};
+
+export default BrokerageNote;
