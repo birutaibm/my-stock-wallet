@@ -1,5 +1,6 @@
 import {Movement as MovementType, Position} from 'protocol';
 import DB from '../Model';
+import { ShortPositionNotSupported } from '../Errors';
 import IRRegister from './IRRegister';
 
 export default class MovementRegister {
@@ -16,6 +17,8 @@ export default class MovementRegister {
       } else {
         newPosition.price = (position.price / position.quantidy) * newPosition.quantidy;
       }
+    } else if (move.direction === 'Sell') {
+      ShortPositionNotSupported();
     }
     DB.setPosition(newPosition);
   }

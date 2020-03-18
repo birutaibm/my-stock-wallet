@@ -2,6 +2,7 @@ import DB from '../Model/Positions';
 import {BrokerageNote, BrokerageNoteItem, Movement, Date} from 'protocol';
 import MovementRegister from './MovementRegister';
 import {sum} from '../utils';
+import {DayTradeNotSupported} from '../Errors';
 
 export default class NoteRegister {
   private createMovement(date: Date, item:BrokerageNoteItem): Movement {
@@ -37,9 +38,13 @@ export default class NoteRegister {
     const result = moves.shift();
     if (result) {
       moves.forEach(move => {
-        result.quantidy += move.quantidy;
-        result.price += move.price;
-        result.direction = result.quantidy > 0 ? 'Buy' : 'Sell';
+        if (result.direction !== move.direction) {
+          DayTradeNotSupported();
+        } else {
+          result.quantidy += move.quantidy;
+          result.price += move.price;
+          result.direction = result.quantidy > 0 ? 'Buy' : 'Sell';
+        }
       });
     }
     return result;

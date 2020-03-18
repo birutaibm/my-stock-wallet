@@ -1,3 +1,7 @@
+export interface ErrorMessage {
+  message: string
+};
+
 export interface Date {
   year: number,
   month: number,
