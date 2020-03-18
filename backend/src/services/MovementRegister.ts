@@ -4,15 +4,20 @@ import IRRegister from './IRRegister';
 
 export default class MovementRegister {
   private addMoveToPosition(move: MovementType, position?: Position) {
+    const newPosition: Position = {
+      ticker: move.ticker,
+      quantidy: move.quantidy,
+      price: move.price,
+    };
     if (position) {
-      DB.setPosition({
-        ...position,
-        price: position.price + move.price,
-        quantidy: position.quantidy + move.quantidy,
-      });
-    } else {
-      DB.setPosition(move);
+      newPosition.quantidy += position.quantidy;
+      if (move.direction === 'Buy') {
+        newPosition.price += position.price;
+      } else {
+        newPosition.price = (position.price / position.quantidy) * newPosition.quantidy;
+      }
     }
+    DB.setPosition(newPosition);
   }
 
   registry(move: MovementType) {
