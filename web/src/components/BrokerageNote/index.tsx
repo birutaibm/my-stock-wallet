@@ -1,22 +1,19 @@
-import React, {useState, Fragment} from 'react';
+import React, {useState, Fragment, useContext} from 'react';
 import { Form } from '@unform/web';
 import { Scope } from '@unform/core';
-import {History} from 'history';
 
-import { BrokerageNote as Type, BrokerageNoteItem } from 'protocol';
-//import Input from './Input';
+import { BrokerageNote as Type, BrokerageNoteItem, ErrorMessage, Position } from 'protocol';
 import Item from './Item';
 import { Container, Item as Labels, Row } from './styles';
 import Date from './Date';
 import Currency from './Currency';
 import api from '../../services/api';
+import Error from '../../pages/Error';
+import NavContext from '../../Switch/Context';
 
-interface Props {
-  history: History
-};
-
-const BrokerageNote: React.FunctionComponent<Props> = function ({history}) {
+export default function BrokerageNote() {
   const [itens, setItens] = useState<BrokerageNoteItem[]>([]);
+  const {setPage} = useContext(NavContext);
   
   function renderItens() {
     return (
@@ -50,10 +47,13 @@ const BrokerageNote: React.FunctionComponent<Props> = function ({history}) {
   }
   
   async function handleSubmit(data: Type) {
-    console.log('Saving note:', data);
-    const response = await api.post('/notes', data);
+    const response = await api.post<Position[] | ErrorMessage>('/notes', data);
+    const error = response.data as ErrorMessage;
+    if (error.message) {
+      setPage(<Error info={error} />)
+    }
     console.log(response);
-    history.push("/");
+    setPage("/");
   }
   
   return (
@@ -73,6 +73,4 @@ const BrokerageNote: React.FunctionComponent<Props> = function ({history}) {
       </Form>
     </Container>
   );
-};
-
-export default BrokerageNote;
+}

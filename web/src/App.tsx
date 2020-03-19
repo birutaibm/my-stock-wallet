@@ -1,10 +1,11 @@
 import React from 'react';
-import Routes from './routes';
+
+import Switch from './Switch';
 
 export default function App() {
   return (
     <div className="App">
-      <Routes />
+      <Switch />
     </div>
   );
 };
