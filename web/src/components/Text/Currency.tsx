@@ -7,10 +7,9 @@ interface Props {
 }
 
 const Currency: FunctionComponent<Props> = function ({value, positiveColor='blue', negativeColor='red'}) {
-  function getText() {
-    let text = Math.abs(Math.round(value)).toString();
-    console.log({text});
-
+  function getTextParts() {
+    const text = Math.abs(Math.round(value)).toString();
+  
     const parts = [
       text.substring(0, text.length - 2),
       text.substring(text.length - 2)
@@ -29,12 +28,13 @@ const Currency: FunctionComponent<Props> = function ({value, positiveColor='blue
         );
       }
     }
-    console.log(parts);
-    
-    text = ',' + (parts.pop() || '00');
-    text = (parts.pop() || '0') + text;
-    console.log({text, parts});
+    return parts;
+  }
 
+  function getText() {
+    const parts = getTextParts();
+    let text = ',' + (parts.pop() || '00');
+    text = (parts.pop() || '0') + text;
     while (parts.length) {
       text = parts.pop() + '.' + text;
     }
@@ -42,7 +42,6 @@ const Currency: FunctionComponent<Props> = function ({value, positiveColor='blue
     if (value < 0) {
       text = '-' + text;
     }
-    console.log(text);
     return text;
   }
 

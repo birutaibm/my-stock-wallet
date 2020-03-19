@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Positions from '../components/Positions';
-import Link from '../Switch/Link';
+import {Link} from '../components/Switch';
 
 export default function Home() {
   return (

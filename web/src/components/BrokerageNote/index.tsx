@@ -7,9 +7,9 @@ import Item from './Item';
 import { Container, Item as Labels, Row } from './styles';
 import Date from './Date';
 import Currency from './Currency';
-import api from '../../services/api';
+import {NavContext} from '../Switch';
 import Error from '../../pages/Error';
-import NavContext from '../../Switch/Context';
+import api from '../../services/api';
 
 export default function BrokerageNote() {
   const [itens, setItens] = useState<BrokerageNoteItem[]>([]);
@@ -47,13 +47,16 @@ export default function BrokerageNote() {
   }
   
   async function handleSubmit(data: Type) {
-    const response = await api.post<Position[] | ErrorMessage>('/notes', data);
-    const error = response.data as ErrorMessage;
-    if (error.message) {
+    let response;
+    try {
+      response = await api.post<Position[] | ErrorMessage>('/notes', data);
+      console.log(response);
+      setPage("/");
+    } catch (e) {
+      console.log(e.response);
+      const error = e.response?.data as ErrorMessage;
       setPage(<Error info={error} />)
     }
-    console.log(response);
-    setPage("/");
   }
   
   return (

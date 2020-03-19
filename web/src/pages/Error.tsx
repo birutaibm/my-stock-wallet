@@ -1,6 +1,6 @@
 import React, {FunctionComponent} from 'react';
 import { ErrorMessage } from 'protocol';
-import Link from '../Switch/Link';
+import {Link} from '../components/Switch';
 
 interface Props {
   info?: ErrorMessage;

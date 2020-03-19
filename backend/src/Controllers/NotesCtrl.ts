@@ -12,9 +12,9 @@ export default {
     } catch (error) {
       if (error instanceof Error) {
         const {message} = error;
-        return res.sendStatus(422).json({message});
+        return res.status(422).json({message});
       } else {
-        return res.sendStatus(500).json({message: "Unknown Error"});
+        return res.status(500).json({message: "Unknown Error"});
       }
     }
   }

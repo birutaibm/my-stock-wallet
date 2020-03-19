@@ -1,21 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, FunctionComponent} from 'react';
 
 import { ComponentDefinition, ComponentLibrary } from './types';
 import NavContext from './Context';
-import Home from '../pages/Home';
-import BrokerageNote from '../components/BrokerageNote';
-import Error from '../pages/Error';
+import Link from './Link';
 
-export default function Switch() {
+interface Props {
+  pages: ComponentLibrary;
+  error: JSX.Element;
+}
+
+const Switch: FunctionComponent<Props> = function({pages, error}) {
   const [page, setPage] = useState<ComponentDefinition>("/");
-  const pages: ComponentLibrary = {
-    '/': (<Home />),
-    '/note': (<BrokerageNote />)
-  };
 
   function getPage(): JSX.Element {
     if (typeof page === 'string') {
-      return pages[page] || (<Error />);
+      return pages[page] || (error);
     } else {
       return page;
     }
@@ -26,4 +25,11 @@ export default function Switch() {
       {getPage()}
     </NavContext.Provider>
   );
-}
+};
+
+export {
+  NavContext,
+  Link,
+};
+
+export default Switch;
