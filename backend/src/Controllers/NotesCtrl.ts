@@ -1,14 +1,19 @@
 import { Request, Response } from 'express';
 import {Position, BrokerageNote, ErrorMessage} from 'protocol';
+import DB from '../Model';
 import NoteRegister from '../services/NoteRegister';
 
-export default {
-  async store(req: Request, res: Response<Position[] | ErrorMessage>) {
+class NotesCtrl {
+  public async index(req: Request, res: Response<BrokerageNote[] | ErrorMessage>) {
+    const notes = DB.getNotes();
+    return res.json(notes);
+  }
+
+  public async store(req: Request, res: Response<BrokerageNote[] | ErrorMessage>) {
     const note:BrokerageNote = req.body;
     try {
-      const positions = new NoteRegister().registry(note);
-      return res.json(positions);
-      
+      const notes = NoteRegister.registry(note);
+      return res.json(notes);
     } catch (error) {
       if (error instanceof Error) {
         const {message} = error;
@@ -19,3 +24,5 @@ export default {
     }
   }
 }
+
+export default new NotesCtrl();

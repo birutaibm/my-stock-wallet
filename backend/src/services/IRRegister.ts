@@ -1,8 +1,7 @@
 import {Movement, Position, IRMovement} from 'protocol';
 import DB from '../Model';
 
-export default class MovementRegister {
- 
+class IRRegister {
   registry(position: Position, move: Movement) {
     const profit = move.price - (move.quantidy * position.price / position.quantidy);
     const ir: IRMovement = {
@@ -12,6 +11,8 @@ export default class MovementRegister {
       profit,
     };
     DB.addIRMovement(ir);
-    return ir;
+    return DB.getIRMovements();
   }
 }
+
+export default new IRRegister();

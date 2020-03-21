@@ -3,7 +3,7 @@ import DB from '../Model';
 import { ShortPositionNotSupported } from '../Errors';
 import IRRegister from './IRRegister';
 
-export default class MovementRegister {
+class MovementRegister {
   private addMoveToPosition(move: MovementType, position?: Position) {
     const newPosition: Position = {
       ticker: move.ticker,
@@ -28,9 +28,12 @@ export default class MovementRegister {
     movements.push(move);
     const position = DB.getPosition(move.ticker);
     if (position && (move.direction === 'Sell')) {
-      new IRRegister().registry(position, move);
+      IRRegister.registry(position, move);
     }
     this.addMoveToPosition(move, position);
     DB.saveMovement(move);
+    return DB.getMovements();
   }
 }
+
+export default new MovementRegister();

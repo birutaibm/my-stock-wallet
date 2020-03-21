@@ -1,10 +1,10 @@
-import DB from '../Model/Positions';
+import DB from '../Model';
 import {BrokerageNote, BrokerageNoteItem, Movement, Date} from 'protocol';
 import MovementRegister from './MovementRegister';
 import {sum} from '../utils';
 import {DayTradeNotSupported} from '../Errors';
 
-export default class NoteRegister {
+class NoteRegister {
   private createMovement(date: Date, item:BrokerageNoteItem): Movement {
     const quantidy = (item.direction === 'Buy') ? 
       Math.abs(item.quantidy) : 
@@ -103,10 +103,13 @@ export default class NoteRegister {
         .map(grouped => this.joinMoves(grouped)));
     console.log(moves);
 
-    const moveRegister = new MovementRegister();
     this.appliedTax(note.value, moves).forEach((move) => {
-      moveRegister.registry(move);
+      MovementRegister.registry(move);
     });
-    return DB.getPositions();
+
+    DB.saveNote(note);
+    return DB.getNotes();
   }
 }
+
+export default new NoteRegister();

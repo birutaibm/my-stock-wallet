@@ -7,7 +7,7 @@ export default function Home() {
     <Fragment>
       <nav className="menu">
         <Link to="/note">
-          Adicionar Nota de Corretagem
+          Notas de Corretagem
         </Link>
       </nav>
       <Positions />

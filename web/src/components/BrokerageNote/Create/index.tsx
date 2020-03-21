@@ -4,11 +4,11 @@ import { Form } from '@unform/web';
 import { BrokerageNote as Type, BrokerageNoteItem, ErrorMessage, Position } from 'protocol';
 import Itens from './Itens';
 import { Container, Row } from './styles';
-import Date from '../Form/Date';
-import Currency from '../Form/Currency';
-import {NavContext} from '../Switch';
-import Error from '../../pages/Error';
-import api from '../../services/api';
+import Date from '../../Form/Date';
+import Currency from '../../Form/Currency';
+import {NavContext} from '../../Switch';
+import Error from '../../../pages/Error';
+import api from '../../../services/api';
 
 export default function BrokerageNote() {
   const [itens, setItens] = useState<BrokerageNoteItem[]>([]);

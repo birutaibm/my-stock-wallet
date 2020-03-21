@@ -1,16 +1,19 @@
 import { Request, Response } from 'express';
 import {Position} from 'protocol';
 import DB from '../Model/Positions';
-import BuySell from '../services/BuySellRegistry';
+import PositionRegister from '../services/PositionRegister';
 
-export default {
-  async index(req: Request, res: Response) {
+class PositionCtrl {
+  public async index(req: Request, res: Response<Position[]>) {
     const positions = DB.getPositions()
     return res.json(positions);
-  },
-  async store(req: Request, res: Response<Position[]>) {
+  }
+
+  public async store(req: Request, res: Response<Position[]>) {
     const position:Position = req.body;
-    const positions = new BuySell().registry(position);
+    const positions = PositionRegister.registry(position);
     return res.json(positions);
   }
 }
+
+export default new PositionCtrl();

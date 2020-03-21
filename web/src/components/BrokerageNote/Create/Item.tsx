@@ -2,10 +2,10 @@ import React, {FunctionComponent} from 'react';
 import { BrokerageNoteItem as type } from 'protocol';
 
 import { Item } from './styles';
-import Input from '../Form/Text';
-import Currency from '../Form/Currency';
-import Number from '../Form/Number';
-import Select from '../Form/Select';
+import Input from '../../Form/Text';
+import Currency from '../../Form/Currency';
+import Number from '../../Form/Number';
+import Select from '../../Form/Select';
 
 interface Props {
   item: type;
