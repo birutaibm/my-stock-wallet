@@ -4,8 +4,9 @@ export const Row = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  input, select {
+  *:not(label) {
     flex: 1;
+    height: 100%;
   }
 `;
 

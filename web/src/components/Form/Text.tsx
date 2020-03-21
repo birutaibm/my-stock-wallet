@@ -5,7 +5,7 @@ interface Props extends HTMLProps<HTMLInputElement> {
   name: string
 }
 
-const Input: FunctionComponent<Props> = function({name, ...rest}) {
+const Text: FunctionComponent<Props> = function({name, ...rest}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const { fieldName, defaultValue = '', registerField } = useField(name);
 
@@ -28,4 +28,4 @@ const Input: FunctionComponent<Props> = function({name, ...rest}) {
   );
 };
 
-export default Input;
+export default Text;
