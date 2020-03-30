@@ -8,7 +8,7 @@ const movements:Movement[] = [{
   },
   direction: 'Buy',
   ticker: "HGTX3",
-  quantidy: 43,
+  quantity: 43,
   price: -100006,
 }];
 

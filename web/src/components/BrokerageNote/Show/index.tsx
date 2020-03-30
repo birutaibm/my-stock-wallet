@@ -5,7 +5,7 @@ import Currency from '../../Text/Currency';
 import Date from '../../Text/Date';
 import {Link} from '../../Switch';
 
-// import { Container } from './styles';
+import { Container, Menu, NoteContainer, NoteHeader, NoteItem, NoteItens, NotesList } from './styles';
 
 export default function View() {
   const [notes, setNotes] = useState<BrokerageNote[]>([]);
@@ -21,39 +21,39 @@ export default function View() {
 
   function renderNote(note: BrokerageNote, index: number) {
     return (
-      <li key={index}>
-        <div>
+      <NoteContainer key={index}>
+        <NoteHeader>
           <div>Data: <Date date={note.date} /></div>
           <div>Total: <Currency value={note.value} /></div>
-        </div>
-        <ul>{note.itens.map((item, i) => {
+        </NoteHeader>
+        <NoteItens>{note.itens.map((item, i) => {
           const direction = item.direction === 'Buy' ? 'Compra' : 'Venda';
           const description = direction + ' de ' +
-              item.quantidy + ' ' + item.ticker + ' por ';
+              item.quantity + ' ' + item.ticker + ' por ';
           const end = ' cada.'
           return (
-            <li key={i}>
+            <NoteItem key={i}>
               {description}<Currency value={item.unitPrice}/>{end}
-            </li>
+            </NoteItem>
           );
-        })}</ul>
-      </li>
+        })}</NoteItens>
+      </NoteContainer>
     );
   }
 
   return (
-    <div>
-      <ul>
+    <Container>
+      <NotesList>
         {notes.length ?
           notes.map(renderNote) :
-          (<li>Nenhuma nota de corretagem cadastrada</li>)
+          (<NoteContainer>Nenhuma nota de corretagem cadastrada</NoteContainer>)
         }
-      </ul>
-      <nav className="menu">
+      </NotesList>
+      <Menu>
         <Link to="/note/create">
           Adicionar Nota de Corretagem
         </Link>
-      </nav>
-    </div>
+      </Menu>
+    </Container>
   );
 }

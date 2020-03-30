@@ -3,7 +3,7 @@ import {Position, Positions} from 'protocol';
 const positions:Positions = {
   HGTX3: [{
     ticker: "HGTX3",
-    quantidy: 116,
+    quantity: 116,
     price: -251880,
   }],
 };

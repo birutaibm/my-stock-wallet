@@ -21,7 +21,7 @@ export default function BrokerageNote() {
       {
         direction: 'Buy',
         ticker: '',
-        quantidy: 0,
+        quantity: 0,
         unitPrice: 0,
       }
     ]);
@@ -31,10 +31,8 @@ export default function BrokerageNote() {
     let response;
     try {
       response = await api.post<Position[] | ErrorMessage>('/notes', data);
-      console.log(response);
       setPage("/");
     } catch (e) {
-      console.log(e.response);
       const error = e.response?.data as ErrorMessage;
       setPage(<Error info={error} />)
     }

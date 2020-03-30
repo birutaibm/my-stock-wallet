@@ -1,4 +1,4 @@
-import React, {useState, FunctionComponent} from 'react';
+import React, {useState, useContext, FunctionComponent} from 'react';
 
 import { ComponentDefinition, ComponentLibrary } from './types';
 import NavContext from './Context';
@@ -11,6 +11,8 @@ interface Props {
 
 const Switch: FunctionComponent<Props> = function({pages, error}) {
   const [page, setPage] = useState<ComponentDefinition>("/");
+  const context = useContext(NavContext);
+  context.setPage = setPage;
 
   function getPage(): JSX.Element {
     if (typeof page === 'string') {
@@ -20,11 +22,7 @@ const Switch: FunctionComponent<Props> = function({pages, error}) {
     }
   }
 
-  return (
-    <NavContext.Provider value={{setPage}} >
-      {getPage()}
-    </NavContext.Provider>
-  );
+  return getPage();
 };
 
 export {

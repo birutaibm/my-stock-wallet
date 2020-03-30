@@ -11,7 +11,7 @@ export interface Date {
 export interface BrokerageNoteItem {
   direction: 'Buy' | 'Sell',
   ticker: string,
-  quantidy: number,
+  quantity: number,
   unitPrice: number,
 }
 
@@ -23,7 +23,8 @@ export interface BrokerageNote {
 
 export interface Position {
   ticker: string,
-  quantidy: number,
+  date?: Date,
+  quantity: number,
   price: number
 };
 
@@ -33,7 +34,7 @@ export interface Movement {
   date: Date,
   direction: 'Buy' | 'Sell',
   ticker: string,
-  quantidy: number,
+  quantity: number,
   price: number,
 };
 

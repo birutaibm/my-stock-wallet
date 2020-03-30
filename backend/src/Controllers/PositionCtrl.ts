@@ -1,18 +1,27 @@
 import { Request, Response } from 'express';
 import {Position} from 'protocol';
-import DB from '../Model/Positions';
 import PositionRegister from '../services/PositionRegister';
+import table from '../database/connection';
+import DateManipulator from '../utils/DateManipulator';
+import Repository from '../Repository/PositionRepository';
+
+type DBPosition = {
+  ticker: string,
+  date: string,
+  quantity: number,
+  price: number
+}
 
 class PositionCtrl {
   public async index(req: Request, res: Response<Position[]>) {
-    const positions = DB.getPositions()
-    return res.json(positions);
+    const filtered = await Repository.getFromDate(null);
+    return res.json(filtered);
   }
 
-  public async store(req: Request, res: Response<Position[]>) {
+  public async store(req: Request, res: Response) {
     const position:Position = req.body;
-    const positions = PositionRegister.registry(position);
-    return res.json(positions);
+    await Repository.save(position);
+    return res.sendStatus(201);
   }
 }
 

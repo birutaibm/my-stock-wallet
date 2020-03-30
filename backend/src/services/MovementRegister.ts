@@ -7,15 +7,15 @@ class MovementRegister {
   private addMoveToPosition(move: MovementType, position?: Position) {
     const newPosition: Position = {
       ticker: move.ticker,
-      quantidy: move.quantidy,
+      quantity: move.quantity,
       price: move.price,
     };
     if (position) {
-      newPosition.quantidy += position.quantidy;
+      newPosition.quantity += position.quantity;
       if (move.direction === 'Buy') {
         newPosition.price += position.price;
       } else {
-        newPosition.price = (position.price / position.quantidy) * newPosition.quantidy;
+        newPosition.price = (position.price / position.quantity) * newPosition.quantity;
       }
     } else if (move.direction === 'Sell') {
       ShortPositionNotSupported();

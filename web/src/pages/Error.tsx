@@ -10,6 +10,7 @@ const Error: FunctionComponent<Props> = function ({info={message: 'Page not Foun
   return (
     <div style={{backgroundColor: 'red'}}>
       <h1>{info.message}</h1>
+      <p>This site is under construction, maybe you try to access something that is not yet ready.</p>
       <Link to="/">Home</Link>
     </div>
   );

@@ -16,7 +16,7 @@ const BrokerageNoteItem: FunctionComponent<Props> = function({item}) {
     <Item>
       <Select name="direction" options={{Buy: 'Compra', Sell: 'Venda'}} required />
       <Input name="ticker" required />
-      <Number name="quantidy" required />
+      <Number name="quantity" required />
       <Currency name="unitPrice" required />
     </Item>
   );

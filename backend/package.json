@@ -17,6 +17,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "protocol": "link:../protocol"
+    "knex": "^0.20.13",
+    "protocol": "link:../protocol",
+    "sqlite3": "^4.1.1"
   }
 }

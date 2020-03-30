@@ -6,19 +6,19 @@ import {DayTradeNotSupported} from '../Errors';
 
 class NoteRegister {
   private createMovement(date: Date, item:BrokerageNoteItem): Movement {
-    const quantidy = (item.direction === 'Buy') ? 
-      Math.abs(item.quantidy) : 
-      - Math.abs(item.quantidy);
+    const quantity = (item.direction === 'Buy') ? 
+      Math.abs(item.quantity) : 
+      - Math.abs(item.quantity);
     const price = (item.direction === 'Buy') ? (
-      - Math.abs(item.unitPrice * quantidy)
+      - Math.abs(item.unitPrice * quantity)
     ) : (
-      Math.abs(item.unitPrice * quantidy)
+      Math.abs(item.unitPrice * quantity)
     );
     return {
       date,
       ticker: item.ticker,
       direction: item.direction,
-      quantidy,
+      quantity,
       price,
     }
   }
@@ -41,9 +41,9 @@ class NoteRegister {
         if (result.direction !== move.direction) {
           DayTradeNotSupported();
         } else {
-          result.quantidy += move.quantidy;
+          result.quantity += move.quantity;
           result.price += move.price;
-          result.direction = result.quantidy > 0 ? 'Buy' : 'Sell';
+          result.direction = result.quantity > 0 ? 'Buy' : 'Sell';
         }
       });
     }
@@ -53,7 +53,7 @@ class NoteRegister {
   private filterMoves(moves: (Movement | undefined)[]): Movement[] {
     const result: Movement[] = [];
     moves.forEach(move => {
-      if (move && move.quantidy) {
+      if (move && move.quantity) {
         result.push(move);
       }
     });
@@ -69,7 +69,6 @@ class NoteRegister {
 
   private appliedTax(noteValue: number, moves: Movement[]) {
     const total = this.getTotals(noteValue, moves.map(move => move.price));
-    console.log({...total, noteValue});
 
     const taxPerUnit = total.tax / total.financialMoves;
     const taxedMoves = moves.map(move => {
@@ -82,7 +81,6 @@ class NoteRegister {
         decimalTax,
       };
     }).sort((v1, v2) => v2.decimalTax - v1.decimalTax);
-    console.log(taxedMoves);
 
     const leadingCents = total.tax - sum(taxedMoves.map(move => move.integerTax));
     taxedMoves.forEach((move, index) => {
@@ -91,7 +89,6 @@ class NoteRegister {
       move.price -= move.integerTax;
       delete move.integerTax;
     });
-    console.log(taxedMoves);
     
     return taxedMoves;
   }
@@ -101,7 +98,6 @@ class NoteRegister {
     const groupedMoves = this.groupMoves(moves);
     moves = this.filterMoves(Object.values(groupedMoves)
         .map(grouped => this.joinMoves(grouped)));
-    console.log(moves);
 
     this.appliedTax(note.value, moves).forEach((move) => {
       MovementRegister.registry(move);
