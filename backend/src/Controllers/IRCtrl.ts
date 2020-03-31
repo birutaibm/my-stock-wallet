@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import {IRMovement} from 'protocol';
-import DB from '../Model';
+import IRMovements from '../Repository/IRMovementRepository';
 
 class IRCtrl {
   public async index(req: Request, res: Response<IRMovement[]>) {
-    const moves = DB.getIRMovements();
+    const moves = await IRMovements.all();
     return res.json(moves);
   }
 }

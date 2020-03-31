@@ -78,11 +78,6 @@ class PositionRepository {
   }
 
   async save(position: Position) {
-    const found = await this.getFromTickerAndDate(position.ticker, null);
-    if (found) {
-      position.price += found.price;
-      position.quantity += found.quantity;
-    }
     const record = PositionConversor.toDB(position);
     return await table('positions').insert(record);
   }

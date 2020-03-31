@@ -1,7 +1,9 @@
 import {Movement as MovementType, Position} from 'protocol';
 import DB from '../Model';
 import { ShortPositionNotSupported } from '../Errors';
-import IRRegister from './IRRegister';
+import IRCalculator from './IRCalculator';
+import IRMovements from '../Repository/IRMovementRepository';
+import Positions from '../Repository/PositionRepository';
 
 class MovementRegister {
   private addMoveToPosition(move: MovementType, position?: Position) {
@@ -9,6 +11,7 @@ class MovementRegister {
       ticker: move.ticker,
       quantity: move.quantity,
       price: move.price,
+      date: move.date,
     };
     if (position) {
       newPosition.quantity += position.quantity;
@@ -20,15 +23,16 @@ class MovementRegister {
     } else if (move.direction === 'Sell') {
       ShortPositionNotSupported();
     }
-    DB.setPosition(newPosition);
+    Positions.save(newPosition);
   }
 
-  registry(move: MovementType) {
+  async registry(move: MovementType) {
     const movements = DB.getMovements();
     movements.push(move);
-    const position = DB.getPosition(move.ticker);
+    const position = await Positions.getFromTickerAndDate(move.ticker, null);
     if (position && (move.direction === 'Sell')) {
-      IRRegister.registry(position, move);
+      const ir = IRCalculator.calcMovement(position, move);
+      IRMovements.save(ir);
     }
     this.addMoveToPosition(move, position);
     DB.saveMovement(move);

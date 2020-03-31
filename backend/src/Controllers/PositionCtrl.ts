@@ -1,16 +1,6 @@
 import { Request, Response } from 'express';
 import {Position} from 'protocol';
-import PositionRegister from '../services/PositionRegister';
-import table from '../database/connection';
-import DateManipulator from '../utils/DateManipulator';
 import Repository from '../Repository/PositionRepository';
-
-type DBPosition = {
-  ticker: string,
-  date: string,
-  quantity: number,
-  price: number
-}
 
 class PositionCtrl {
   public async index(req: Request, res: Response<Position[]>) {
