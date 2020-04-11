@@ -1,4 +1,4 @@
-import React, {useState, useContext, FunctionComponent} from 'react';
+import {useState, useContext, FunctionComponent} from 'react';
 
 import { ComponentDefinition, ComponentLibrary } from './types';
 import NavContext from './Context';
