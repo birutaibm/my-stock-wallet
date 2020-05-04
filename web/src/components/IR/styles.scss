@@ -1,0 +1,32 @@
+%flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%row {
+  @extend %flex;
+  flex-direction: row;
+}
+
+.container {
+  @extend %flex;
+  flex-direction: column;
+}
+
+table {
+  background-color: #ddd;
+  tr {
+    td {
+      background-color: #fff;
+      padding: 2px 5px;
+      &.right {
+        text-align: right;
+      }
+    };
+    th {
+      padding: 2px 5px;
+      background-color: #999;
+    }
+  }
+}

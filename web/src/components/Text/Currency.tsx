@@ -1,4 +1,5 @@
 import React, {FunctionComponent} from 'react';
+import ColoredNumber from './ColoredNumber';
 
 interface Props {
   value: number;
@@ -45,12 +46,13 @@ const Currency: FunctionComponent<Props> = function ({value, positiveColor='blue
     return text;
   }
 
-  function getColor() {
-    return (value<0) ? {color: negativeColor} : {color: positiveColor};
-  }
-
   return (
-    <span style={getColor()}>{getText()}</span>
+    <ColoredNumber
+      value={value}
+      format={(v:number) => getText()}
+      positiveColor={positiveColor}
+      negativeColor={negativeColor}
+    />
   );
 };
 

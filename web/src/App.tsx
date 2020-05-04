@@ -7,6 +7,8 @@ import ShowNotes from './components/BrokerageNote/Show';
 import CreateNote from './components/BrokerageNote/Create';
 import ShowPositions from './components/Positions/Show';
 import CreatePosition from './components/Positions/Create';
+import Movements from './components/Movements';
+import IR from './components/IR';
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
         '/position/create': (<CreatePosition />),
         '/note': (<ShowNotes />),
         '/note/create': (<CreateNote />),
+        '/movement': (<Movements />),
+        '/ir': (<IR />),
       }} error={(<Error />)}/>
       <nav className="menu">
         <Link to="/position"> Posições </Link>
