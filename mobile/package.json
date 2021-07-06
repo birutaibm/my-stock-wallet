@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.11.0",
     "axios": "^0.21.1",
-    "polished": "^3.5.2",
+    "polished": "^3.7.2",
     "styled-components": "^5.1.0",
     "react-native": "0.64.2"
   },
