@@ -13,7 +13,7 @@
     "react": "16.14.0",
     "axios": "^0.21.3",
     "polished": "^3.7.2",
-    "styled-components": "^5.1.0",
+    "styled-components": "^5.3.1",
     "react-native": "0.65.0"
   },
   "devDependencies": {
