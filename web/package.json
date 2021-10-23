@@ -18,7 +18,7 @@
     "axios": "^0.21.3",
     "inputmask": "^5.0.6",
     "node-sass": "^5.0.0",
-    "protocol": "link:../protocol",
+    "protocol": "0.4.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
