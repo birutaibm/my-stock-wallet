@@ -8828,9 +8828,10 @@ prop-types@^15.6.2, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
-"protocol@link:../protocol":
-  version "0.0.0"
-  uid ""
+protocol@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/protocol/-/protocol-0.4.0.tgz#3114644f63c260c7e9395b490c9c3aa5addce384"
+  integrity sha1-MRRkT2PCYMfpOVtJDJw6pa3c44Q=
 
 proxy-addr@~2.0.5:
   version "2.0.6"
