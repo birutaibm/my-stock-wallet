@@ -17,7 +17,7 @@
     "@unform/web": "^2.0.0",
     "axios": "^0.21.3",
     "inputmask": "^5.0.6",
-    "node-sass": "^5.0.0",
+    "node-sass": "^7.0.0",
     "protocol": "link:../protocol",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
