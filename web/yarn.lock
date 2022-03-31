@@ -1719,10 +1719,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@snyk/protect@latest":
-  version "1.858.0"
-  resolved "https://registry.yarnpkg.com/@snyk/protect/-/protect-1.858.0.tgz#b56d6b0532d2520678297c6aab61240d042a17f0"
-  integrity sha512-roeB5+zK/APpGl0hosAjRX7lwzpIpHGkuVj7xzE8ccBxTPe41/7FVNaafVOQ40ljUy4UKcJRSYkLJ7ujW+uvNA==
+"@snyk/protect@1.865.0":
+  version "1.865.0"
+  resolved "https://registry.yarnpkg.com/@snyk/protect/-/protect-1.865.0.tgz#43a110014dc7101d5dc4419c45e4b0ddf7f64e9c"
+  integrity sha512-WacS+RsOR9IdyjsJI+H9JouU0OPr+j5xTR9GOqH/Hc0/O0+RhJqjdGv08fgmxm8YLSOq9obV2EDonPUc/mljNQ==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -8475,7 +8475,8 @@ prop-types@^15.6.2, prop-types@^15.7.2:
     react-is "^16.8.1"
 
 "protocol@link:../protocol":
-  version "1.0.0"
+  version "0.0.0"
+  uid ""
 
 proxy-addr@~2.0.5:
   version "2.0.6"
