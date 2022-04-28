@@ -19,6 +19,6 @@
     "express": "^4.17.1",
     "knex": "^0.20.13",
     "protocol": "link:../protocol",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^5.0.3"
   }
 }
