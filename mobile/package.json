@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "react": "16.14.0",
-    "axios": "^1.6.0",
+    "axios": "^1.6.1",
     "polished": "^3.7.2",
     "styled-components": "^5.3.3",
     "react-native": "0.72.6"
