@@ -15,7 +15,7 @@
     "@types/styled-components": "^5.1.23",
     "@unform/core": "^2.1.6",
     "@unform/web": "^2.1.6",
-    "axios": "^0.26.0",
+    "axios": "^1.6.0",
     "inputmask": "^5.0.7",
     "node-sass": "^7.0.2",
     "protocol": "link:../protocol",
